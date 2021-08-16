@@ -41,7 +41,7 @@
               <form>
                 <div ng-repeat="item in section.content track by $index" ng-if="pluginComponent.isItemVisible(item,section)" plugin-visible="item.visibleIf" section="section"
                      class="form-group">
-
+              
                   <label for="{{item.id}}" class="plugin-label control-label">
                     {{item.label}}
                   </label>
@@ -74,7 +74,98 @@
                               ng-click="pluginComponent.saveButton(item)">
                         {{item.button_label !== undefined ? item.button_label : item.label}}
                       </button>
+<!-- Begin modification for audio system -->
+                      <div ng-switch-when="switchRow" class="container">
+                        <div class="form-row" id="{{item.id}}">
+                          <div class="col-sm-4">
+                            <input id="{{item.name.id}}" type="text" placeholder="Switch Name" plugin-attributes="item.name.attributes" ng-model="item.name.value" class="form-control">
+                          </div>
+                          <div class="col-sm-4">
+                            <input id="{{item.switch.id}}" type="text" placeholder="Switch IP Address" plugin-attributes="item.switch.attributes" ng-model="item.switch.value" class="form-control">
+                          </div>
+                          <div class="col-xs-8 col-sm-3">
+                            <input id="{{item.enable.id}}" bs-switch type="checkbox" ng-model="item.enable.value" switch-size="medium" switch-animate="false"
+                            switch-on-text="On" switch-off-text="Off" ng-true-value="true" ng-false-value="false">
+                          </div>
+                          <div class="col-xs-3 col-sm-2">
+                            <button id="{{item.delete.id}}" type="button" class="btn btn-info" name="{{item.delete.id}}" plugin-attributes="item.delete.attributes" ng-click="pluginComponent.saveButton(item.delete)">
+                              {{item.delete.label}}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
 
+                      <div ng-switch-when="speakerRow" class="container">
+                        <div class="form-row" id="{{item.id}}">
+                          <div class="col-sm-4">
+                            <input id="{{item.name.id}}" type="text" placeholder="Speaker Name" plugin-attributes="item.name.attributes" ng-model="item.name.value" class="form-control">
+                          </div>
+                          <div class="col-sm-4">
+                            <ui-select id="{{item.device.id}}" ng-model="item.device.value" search-enabled="false" ng-readonly="true" append-to-body="true" theme="bootstrap">
+                              <ui-select-match class="ui-select-match" placeholder="Speaker Device">
+                                {{$select.selected.label}}
+                              </ui-select-match>
+                              <ui-select-choices class="ui-select-choices" repeat="option in item.device.options track by $index">
+                                <div ng-bind-html="option.label"></div>
+                              </ui-select-choices>
+                            </ui-select>
+                          </div>
+                          <div class="col-sm-4">
+                            <ui-select id="{{item.switch.id}}" ng-model="item.switch.value" search-enabled="false" ng-readonly="true" append-to-body="true" theme="bootstrap">
+                              <ui-select-match class="ui-select-match" placeholder="Speaker Switch">
+                                {{$select.selected.label}}
+                              </ui-select-match>
+                              <ui-select-choices class="ui-select-choices" repeat="option in item.switch.options track by $index">
+                                <div ng-bind-html="option.label"></div>
+                              </ui-select-choices>
+                            </ui-select>
+                          </div>
+                          <div class="col-sm-2">
+                            <button id="{{item.delete.id}}" type="button" class="btn btn-info" name="{{item.delete.id}}" plugin-attributes="item.delete.attributes" ng-click="pluginComponent.saveButton(item.delete)">
+                              {{item.delete.label}}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div ng-switch-when="zoneRow" class="container">
+                        <div class="form-row" id="{{item.id}}">
+                          <div class="col-sm-4">
+                            <input id="{{item.name.id}}" type="text" placeholder="Zone Name" plugin-attributes="item.name.attributes" ng-model="item.name.value" class="form-control">
+                          </div>
+                          <div class="col-sm-4">
+                            <ui-select id="{{item.speakers.id}}" ng-model="item.speakers.value" search-enabled="false" ng-readonly="true" append-to-body="true" theme="bootstrap">
+                              <ui-select-match class="ui-select-match" placeholder="Zone Speakers">
+                                {{$select.selected.label}}
+                              </ui-select-match>
+                              <ui-select-choices class="ui-select-choices" repeat="option in item.speakers.options track by $index">
+                                <div ng-bind-html="option.label"></div>
+                              </ui-select-choices>
+                            </ui-select>
+                          </div>
+                          <div class="col-sm-2">
+                            <button id="{{item.delete.id}}" type="button" class="btn btn-info" name="{{item.delete.id}}" plugin-attributes="item.delete.attributes" ng-click="pluginComponent.saveButton(item.delete)">
+                              {{item.delete.label}}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div ng-switch-when="ConfigFooter" class="container">
+                        <div class="form-row" id="{{item.id}}">
+                          <div class="col-xs-5 col-sm-2">
+                            <button id="{{item.add.id}}" type="button" class="btn btn-info" name="{{item.add.id}}" plugin-attributes="item.add.attributes" ng-click="pluginComponent.saveButton(item.add)">
+                              {{item.add.label}}
+                            </button>
+                          </div>
+                          <div class="col-xs-5 col-sm-2">
+                            <button id="{{item.save.id}}" type="button" class="btn btn-info" name="{{item.save.id}}" plugin-attributes="item.save.attributes" ng-click="pluginComponent.saveButton(item.save)">
+                              {{item.save.label}}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+<!-- End modification for audio system -->
                       <div ng-switch-default>
                       </div>
                     </div>
