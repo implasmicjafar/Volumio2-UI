@@ -9,7 +9,8 @@ class ToastMessageService {
       extendedTimeOut: 1000,
       progressBar: true,
       maxOpened: 1,
-      autoDismiss: true
+      autoDismiss: true,
+      allowHtml: true
     };
 
     $rootScope.$on('socket:init', () => {

@@ -52,6 +52,19 @@ class WaitBackendScrimController {
       }
       //this.$state.go('volumio.playback');
     });
+    this.socketService.on('showBusy', data => {      
+      if(this.socketService.isConnected)
+      {        
+        if (this.$document.querySelector('#waitBackendScrim')) {
+          this.$document.querySelector('#waitBackendScrim').classList.remove('hideScrim');
+        }
+      }
+    });
+    this.socketService.on('hideBusy', data => {
+      if (this.socketService.isConnected) {
+        this.hideSrcrim();
+      }
+    });
   }
 
   initService() {
