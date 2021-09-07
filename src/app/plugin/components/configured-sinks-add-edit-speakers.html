@@ -1,0 +1,110 @@
+<form class="form-horizontal">    
+    <div class="form-group">
+      <label for="speaker_new_name"
+          class="control-label"><span>Display Name</span>
+      </label>
+      <div class="control-item">
+        <input id="speaker_new_name"
+            type="text"
+            ng-model="item.onClick.data.data.name"
+            placeholder="Display Name"
+            class="form-control">
+      </div>
+      <div class="control-description">
+        <span ng-if="section.inAddMode">Unique name for the room or speaker.</span>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="speaker_new_device"
+          class="control-label"><span>Output Device</span>
+      </label>
+      <div class="control-item">
+        <ui-select id="speaker_new_device" 
+            class="form-control" 
+            ng-model="item.onClick.data.data.device" 
+            search-enabled="false" 
+            append-to-body="true" 
+            theme="bootstrap">         
+            <ui-select-match placeholder="Select a device to assign to this speaker.">{{$select.selected.label}}</ui-select-match>   
+            <ui-select-choices class="ui-select-choices" repeat="option in section.devices track by $index">
+              <div ng-bind-html="option.label"></div>
+            </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="control-description">
+         <span ng-if="section.inAddMode">Physical speaker device.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="speaker_new_control"
+            class="control-label"><span>Output Control</span>
+        </label>
+        <div class="control-item">
+          <input id="speaker_new_control"
+              type="text"
+              ng-model="item.onClick.data.data.control"
+              title="[Speaker or PCM] The name of the mixer to use to adjust output volume. If not specified, volume in adjusted in software"
+              placeholder="[Speaker or PCM] Alsa output device mixer"
+              class="form-control">
+        </div>
+        <div class="control-description">
+           <span ng-if="section.inAddMode">Output device control.</span>
+        </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="speaker_new_mixer"
+          class="control-label"><span>Control Mixer</span>
+      </label>
+      <div class="control-item">
+        <input id="speaker_new_mixer"
+            type="text"
+            ng-model="item.onClick.data.data.mixer"
+            placeholder="[] Alsa Mixer device"
+            title="[] The mixer_device default is whatever the output_device is."
+            class="form-control">
+      </div>
+      <div class="control-description">
+         <span ng-if="section.inAddMode">Control Mixer. Default to output device.</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label for="speaker_new_switch"
+            class="control-label"><span>Assigned Switch</span>
+        </label>
+        <div class="control-item">
+          <ui-select id="speaker_new_switch" 
+            class="form-control" 
+            ng-model="item.onClick.data.data.sw" 
+            search-enabled="false"             
+            append-to-body="true" 
+            theme="bootstrap">   
+              <ui-select-match placeholder="Select a switch to assign to this speaker.">{{$select.selected.name}}</ui-select-match>                        
+              <ui-select-choices class="ui-select-choices" repeat="option in section.switches track by $index">
+                <div ng-bind-html="option.name"></div>
+              </ui-select-choices>
+          </ui-select>
+        </div>
+        <div class="control-description">
+           <span ng-if="section.inAddMode">Speaker assigned switch.</span>
+        </div>
+      </div>     
+  
+    <div class="form-group">
+      <label class="control-label"></label>
+      <div class="control-item">
+        <button ng-click="pluginComponent.saveButton(pluginComponent.pluginObj.cancel)" 
+            type="button" class="btn btn-warning" title="{{'COMMON.CANCEL' | translate}}">
+          <span translate="COMMON.CANCEL"></span>
+        </button>
+        <button ng-click="pluginComponent.saveButton(item)" type="button"
+            class="btn btn-info" style="float: right;" title="{{'COMMON.SAVE' | translate}}">
+          <span translate="COMMON.SAVE"></span>
+        </button>        
+      </div>
+    </div>
+  </form>
+  
