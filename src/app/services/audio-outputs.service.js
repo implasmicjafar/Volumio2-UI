@@ -93,6 +93,8 @@ class AudioOutputsService {
               }
             }
           }
+    this.outputs = loopCheckList;
+    this.thisOutput = this.outputs.find(d => d.isSelf);
         }
     this.outputs = loopCheckList;
     this.thisOutput = this.outputs.find(d => d.isSelf);

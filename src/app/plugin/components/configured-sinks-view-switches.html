@@ -1,0 +1,59 @@
+<table class="table tableSmall" ng-if="section.content">
+    <tr>
+      <th class="text-center"><span>Name</span></th>      
+      <th class="text-center"><span>IP</span></th>
+      <th class="text-center"><span>MAC</span></th>
+      <th class="text-center"><span>Status</span></th>
+      <th></th>
+    </tr>
+    <tr ng-repeat-start="switch in section.content track by switch.id">
+      <td class="text-center">
+        <a class="btn btn-link btn-sm" ng-click="pluginComponent.saveButton(switch.view)">
+        <span>{{switch.name}}</span>
+        </a>
+      </td>      
+      <td class="text-center">
+        <a class="btn btn-link btn-sm" target="_blank" rel="noopener noreferrer" href="http://{{switch.ip}}">
+            <span>{{switch.ip}}</span>
+        </a>        
+      </td>
+      <td class="text-center">
+        {{switch.mac}}
+      </td>
+      <td ng-if="switch.reachable" class="text-center">          
+            <i ng-if="switch.status == 0" class="fa fa-toggle-off false" title="Off"></i>
+            <i ng-if="switch.status == 1" class="fa fa-toggle-on true" title="On"></i>
+      </td>
+      <td ng-if="!switch.reachable" ng-switch="switch.status" class="text-center">
+        <i ng-switch-when="-1" class="fa fa-remove false" title="Unset"></i>
+        <i ng-switch-when="-5" class="fa fa-remove false" title="Failed to connect to the ip"></i>
+        <i ng-switch-when="-3" class="fa fa-remove false" title="Bad or Invalid ip address"></i>
+        <i ng-switch-default class="fa fa-remove false" title="Unknown Error"></i>        
+      </td>
+      <td class="commandCol" class="text-right">        
+        <button ng-click="pluginComponent.saveButton(switch.edit)"
+            type="button"
+            class="btn btn-info"
+            title="Edit Switch">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button ng-click="pluginComponent.saveButton(switch.delete)"
+            type="button"
+            class="btn btn-danger"
+            title="Delete Switch">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+
+    <tr ng-if="section.inEditSwitch === $index" ng-repeat-end="">
+      <td colspan="5">
+        <div class="row">
+          <div class="col-xs-24">
+            <ng-include ng-init="switchitem = switch.save" src="'app/plugin/components/configured-sinks-add-edit-switches.html'">
+            </ng-include>
+          </div>
+        </div>
+      </td>
+    </tr>
+</table>

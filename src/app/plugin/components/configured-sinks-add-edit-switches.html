@@ -1,0 +1,84 @@
+<form class="form-horizontal">    
+    <div class="form-group">
+      <label for="switch_new_name"
+          class="control-label"><span>Name</span>
+      </label>
+      <div class="control-item">
+        <input id="switch_new_name"
+            type="text"
+            ng-model="switchitem.onClick.data.data.name"
+            placeholder="Name"
+            class="form-control">
+      </div>
+      <div class="control-description">
+        <span ng-if="section.inAddMode">Unique name to identify the switch.</span>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="switch_new_ip"
+          class="control-label"><span>IP Address</span>
+      </label>
+      <div class="control-item">
+        <input id="switch_new_ip"
+            type="text"
+            ng-model="switchitem.onClick.data.data.ip"
+            placeholder="xxx.xxx.xxx.xxx"
+            class="form-control">
+      </div>
+      <div class="control-description">
+         <span ng-if="section.inAddMode">IP Address for Tasmota Switch.</span>
+      </div>
+    </div>
+  
+    <div class="form-group">
+      <label for="switch_new_mac"
+          class="control-label"><span>MAC Address</span>
+      </label>
+      <div class="control-item">
+        <input id="switch_new_mac"
+            type="text"
+            ng-model="switchitem.onClick.data.data.mac"
+            placeholder="00:00:00:00:00:00"
+            class="form-control">
+      </div>
+      <div class="control-description">
+         <span ng-if="section.inAddMode">MAC for the Tasmota Device.</span>
+      </div>
+    </div>
+
+    <div class="form-group" ng-if="!section.inAddMode">
+        <label for="switch_new_enabled"
+            class="control-label"><span>Enabled</span>
+        </label>
+        <div class="control-item">
+          <input id="switch_new_enabled" bs-switch
+              type="checkbox"              
+              switch-animate="false"
+              switch-on-text="" 
+              switch-off-text="" 
+              ng-true-value="true" 
+              ng-false-value="false"
+              ng-model="switchitem.onClick.data.data.enabled"              
+              class="form-control">
+        </div>
+        <div class="control-description">
+           <span></span>
+        </div>
+    </div>    
+  
+    <div class="form-group">
+      <label class="control-label"></label>
+      <div class="control-item">
+        <button ng-click="pluginComponent.saveButton(pluginComponent.pluginObj.cancel)" 
+            type="button" class="btn btn-warning" title="{{'COMMON.CANCEL' | translate}}">
+          <span translate="COMMON.CANCEL"></span>
+        </button>
+        <button ng-click="pluginComponent.saveButton(switchitem)" type="button"
+            class="btn btn-info" style="float: right;" title="{{'COMMON.SAVE' | translate}}">
+          <span translate="COMMON.SAVE"></span>
+        </button>        
+      </div>
+    </div>
+  </form>
+  

@@ -6,7 +6,7 @@ class PluginComponent {
         pluginName: '=',
         type: '='
       },
-      templateUrl: 'app/plugin/components/plugin-component.html',
+      templateUrl: 'app/plugin/components/plugin-component.html',      
       controller: PluginComponentController,
       controllerAs: 'pluginComponent'
     };
@@ -155,7 +155,7 @@ class PluginComponentController {
   }
 
   registerListner() {
-    this.socketService.on('pushUiConfig', data => {
+    this.socketService.on('pushUiConfig', data => {      
       //NOTE this commented lines are for testing pourpose
       // data.sections.unshift({coreSection: 'ui-settings'});
       // data.sections.unshift({coreSection: 'wifi'});
@@ -197,7 +197,7 @@ class PluginComponentController {
           }
         );
       }
-    });
+    });    
   }
 
   initWatchers() {

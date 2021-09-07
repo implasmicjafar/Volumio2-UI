@@ -1,0 +1,41 @@
+<button ng-click="pluginComponent.saveButton(pluginComponent.pluginObj.refresh)" id="{{pluginComponent.pluginObj.refresh.id}}" type="button"class="btn btn-info" style="float: right;" title="Refresh Tables">
+    <i class="fa fa-refresh"></i>
+    <span translate="COMMON.RESCAN"></span>       
+</button>
+<div class="clearfix"></div>
+<div class="panel panel-default" ng-if="!section.hidden" ng-repeat="section in pluginComponent.pluginObj.sections track by $index">
+    <div ng-if="!section.coreSection" class="panel-heading">
+        <h3 class="panel-title">
+          <i ng-if="section.icon" class="fa {{section.icon}}"></i>
+          <span>{{section.label}}</span>
+          <i class="fa fa-info-circle pull-right" ng-click=""></i>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <h4 class="sectionDescription" ng-if="section.description">
+          {{section.description}}
+        </h4>
+        <button ng-if="!section.inAddMode" ng-click="pluginComponent.saveButton(section.add)" id="addNew{{section.id}}" type="button" class="btn btn-info" style="float: right;" title="Add New {{section.label}}">
+            <span>
+            <i class="fa fa-plus"></i>
+            <span translate="{{section.addLabel}}"></span>
+            </span>        
+        </button>
+      <div class="clearfix"></div>
+      <br>
+      <ng-template ng-if="section.inAddMode" ng-switch="section.id">
+        <div ng-switch-when="zone_definitions">
+            <ng-include ng-init="item = section.saveNew" src="'app/plugin/components/configured-sinks-add-edit-zones.html'"></ng-include>
+        </div>
+        <div ng-switch-when="speakers_definitions">
+            <ng-include ng-init="item = section.saveNew" src="'app/plugin/components/configured-sinks-add-edit-speakers.html'"></ng-include>
+        </div>
+        <div ng-switch-when="switches_definitions">
+            <ng-include ng-init="switchitem = section.saveNew" src="'app/plugin/components/configured-sinks-add-edit-switches.html'"></ng-include>
+        </div>
+      </ng-template>
+      <ng-template ng-if="section.id === 'zone_definitions'" ng-include="'app/plugin/components/configured-sinks-view-zones.html'"></ng-template>
+      <ng-template ng-if="section.id === 'speakers_definitions'" ng-include="'app/plugin/components/configured-sinks-view-speakers.html'"></ng-template>
+      <ng-template ng-if="section.id === 'switches_definitions'" ng-include="'app/plugin/components/configured-sinks-view-switches.html'"></ng-template>
+    </div>    
+</div>
